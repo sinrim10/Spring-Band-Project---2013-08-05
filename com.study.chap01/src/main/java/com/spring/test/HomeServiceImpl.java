@@ -25,4 +25,10 @@ public class HomeServiceImpl implements HomeService{
 		
 	}
 
+	@Override
+	public void insert(Command command) {
+		// TODO Auto-generated method stub
+		sqlMapClientTemplate.insert("sample.query2",command);
+	}
+
 }

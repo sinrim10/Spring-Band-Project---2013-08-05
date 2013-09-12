@@ -7,5 +7,10 @@
 	<select id="sample.query1" resultClass="hashmap"><![CDATA[
 		select * from springtable
 	]]></select>
+	
+	<insert id="sample.query2" parameterClass="com.spring.test.Command">
+		insert into user_t (group, type) 
+		values(#group#,#type#)
+	</insert>
 </sqlMap>
 
