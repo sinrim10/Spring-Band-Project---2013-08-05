@@ -1,14 +1,15 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags"	prefix="s" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%-- <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%> --%>
+
 <html>
 <head>
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
+<h1> 	
+	안녕하세요~!!!
 </h1>
-
-<P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
