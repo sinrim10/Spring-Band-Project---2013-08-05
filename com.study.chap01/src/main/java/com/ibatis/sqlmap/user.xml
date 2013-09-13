@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="user_t">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="user" type="exam.ibatis.dto.UserDto"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties 
+       exactly. -->
+  
+  <!-- Select with no parameters using the result map for Account class. -->
+  <select id="selectAllUsers" resultClass="exam.ibatis.dto.UserDto">
+    select usrid,uname,upw,ucmt,rn
+    from(select usrid,uname,upw,ucmt,ceil(rownum/30)as rn
+    from(select * from user_t order by usrid desc))a
+    where rn = 1
+  </select>
+  
+  <!-- 회원 등록 -->
+  <insert id="registerUser" parameterClass="exam.ibatis.dto.UserDto">
+  insert into user_t (usrid,uname,upw,ucmt)
+  values(#usrid#,#uname#,#upw#,#ucmt#)
+  </insert>
+  
+  <!-- 상세 보기용  -->
+  <select id="selectUser" parameterClass="String" resultClass="exam.ibatis.dto.UserDto">
+    select * from user_t where usrid = #usrid#
+  </select>
+  
+  <!-- 정보 수정 -->
+  <insert id="updateUser" parameterClass="exam.ibatis.dto.UserDto">
+  update user_t set upw=#newUpw#,uname=#uname# where usrid = #usrid#
+  </insert>
+  
+   <!-- 회원 탈퇴 -->
+  <insert id="deleteUser" parameterClass="String">
+  delete user_t where usrid=#usrid#
+  </insert>
+  
+
+  
+  
+  
+  
+</sqlMap>
