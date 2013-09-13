@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--
+	이름 충돌을 방지하기 위해 namespace를 사용
+	SqlMapConfig.xml에 <settings useStatementNamespaces="true"/> 설정이 지정되어 있는 경우
+	sql구문을 찾을 때 반드시 namespace값을 포함해야 한다.
+-->
+<sqlMap namespace="DEPT">
+
+	<!-- 클래스의 전체 경로 대신에 별칭을 사용할 수 있도록 지정 -->
+	<!-- test.Dept 있는 자리에 department만 써주면 됨 -->
+	<typeAlias alias="department" type="test.Dept"/>
+	
+	<!-- 
+		- id = sql구문을 구별하는 식별자.
+		- parameterClass = sql 실행시 필요한 파라메터값을 가진 객체.
+		- 객체의 멤버변수의 이름과 쿼리의 parameter의 이름을 같도록 설정해주면 
+		     자동으로 parameter가 셋팅 됨.
+	 -->  
+  	<insert id="add" parameterClass="test.Dept">
+  		INSERT
+  		INTO DEPT(deptno, dname, loc)
+  		VALUES(#deptno#, #dname#, #loc#)
+  	</insert>
+
+	<!-- 
+		부서번호에 해당하는 부서정보 한 개 반환하는 쿼리
+	 -->	
+	<select id="info" parameterClass="int" resultClass="test.Dept">
+		SELECT deptno, dname, loc
+		FROM DEPT
+		WHERE DEPTNO = #value#
+	</select>
+	
+	<!-- DEPT 테이블의 모든 데이터를 반환하는 쿼리 -->
+	<select id="infoAll" resultClass="department">
+		SELECT deptno, dname, loc
+		FROM DEPT
+	</select>
+	
+</sqlMap>
