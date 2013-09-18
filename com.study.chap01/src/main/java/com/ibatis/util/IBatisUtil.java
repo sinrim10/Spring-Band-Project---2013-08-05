@@ -17,7 +17,7 @@ public class IBatisUtil {
 	 static {
 		    try {
 		    	//클래스 패스 경로
-		      Reader reader = Resources.getResourceAsReader("exam/ibatis/sqlmap/SqlMapConfig.xml");
+		      Reader reader = Resources.getResourceAsReader("com/ibatis/sqlmap/SqlMapConfig.xml");
 		      sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
 		      reader.close(); 
 		    } catch (IOException e) {
